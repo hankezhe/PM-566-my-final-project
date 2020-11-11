@@ -41,7 +41,7 @@ opts_chunk$set(
 }
 ```
 
-
+# For lab 12
 ## Add code for visuals
 ```{r load-data}
 source("process_COVID_data.R")
@@ -94,6 +94,7 @@ p2_scatter
 
 # For Assignment#5
 ```{r, message=FALSE, echo=FALSE, warning=FALSE, results='hide',fig.show='hide'}
+# Prep the data 
 library(data.table)
 ### First download the data and read into data table
 dhds <- data.table::fread("/Users/hankezheng/Desktop/DHDS.csv")
@@ -234,7 +235,6 @@ p3_scat <- ggplotly(p3)
 ## Graphs {.tabset}
 
 Create tabs to display each figure
-
 ### Prevalence of any disability by age
 
 ```{r p1_scat}
