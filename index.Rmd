@@ -1,13 +1,11 @@
 ---
-title: "PM566 Final Project"
+title: "PM566 Lab 12 & Assignment 5"
 author: "Hanke Zheng"
 output: 
     html_document:
         toc: TRUE
         toc_float: TRUE
 ---
-
-This is my PM566 Final Project website.
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(data.table)
@@ -41,7 +39,7 @@ opts_chunk$set(
 }
 ```
 
-# For lab 12
+# Lab 12
 ## Add code for visuals
 ```{r load-data}
 source("process_COVID_data.R")
@@ -92,12 +90,12 @@ p2_scatter
 ```
 
 
-# For Assignment#5
+# Assignment#5
 ```{r, message=FALSE, echo=FALSE, warning=FALSE, results='hide',fig.show='hide'}
 # Prep the data 
 library(data.table)
 ### First download the data and read into data table
-dhds <- data.table::fread("/Users/hankezheng/Desktop/DHDS.csv")
+dhds <- data.table::fread("/Users/hankezheng/pm512/PM-566-my-final-project/data/DHDS.csv")
 dhds <- data.frame(dhds)
 dhds_dt <- data.table(dhds)
 ### Data cleaning & check on important variables
