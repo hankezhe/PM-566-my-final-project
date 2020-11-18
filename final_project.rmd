@@ -36,6 +36,8 @@ opts_chunk$set(
 ```
 # Introducation: 
 **The objective is to explore (1)the association between disability prevalence and age, and (2)the association between prevalence of different types of disability across the US, especially between cognitive disability and mobidity disability. **
+
+
 ## Several specific questions were addressed.
 - Is the prevalence of distributed evenly across states?
 - On average, what is the mean prevalence for each disability in each age group? 
