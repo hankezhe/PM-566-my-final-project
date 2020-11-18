@@ -34,11 +34,11 @@ opts_chunk$set(
   out.width = "700px",
   class.source = "code-r")
 ```
-# Introducation: 
+## Introducation: 
 **The objective is to explore (1)the association between disability prevalence and age, and (2)the association between prevalence of different types of disability across the US, especially between cognitive disability and mobidity disability. **
 
 
-## Several specific questions were addressed.
+### Several specific questions were addressed.
 - Is the prevalence of distributed evenly across states?
 - On average, what is the mean prevalence for each disability in each age group? 
 - Within each age group, which state has the highest/lowest overall prevalence of any disability? How about cognitive disability and mobidity disability? 
@@ -46,7 +46,7 @@ opts_chunk$set(
 - Is there an association between age and prevalence of disability? 
 - Is there an association between prevalence of cognitive disability and mobidity disability? 
 
-## Background of the raw dataset
+### Background of the raw dataset
 The data source for this program is the Disability and Health Data System (DHDS), which is an online state-level data on adults with disabilities in the US in 2018. Prevalence on six functional disability types, including cognitive (serious difficulty concentrating, remembering or making decisions), hearing (serious difficulty hearing or deaf), mobility (serious difficulty walking or climbing stairs), vision (serious difficulty seeing), self-care (difficulty dressing or bathing) and independent living (difficulty doing errands alone),are reported by age group, race, gender, and veteran status within each state, respectively. 
 
 ## Methods:
