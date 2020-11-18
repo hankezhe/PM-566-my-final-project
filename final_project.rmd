@@ -192,7 +192,7 @@ dhds_age_comb_dt[(age_grp=="65+")][order(pre_any)]%>% tail(1)
 - For age 18-44, disability of any disease is the least prevalent in DC (12.9%) whereas it's most prevalent in Puerto Rico(29.3%). For age 45-65, For age 65+,disability of any disease is the least prevalent in Colorado (20.6%) whereas it's the most prevalent in Puerto Rico(53.3%). For 65+, disability of any disease is the least prevalent in Colorado (32.2%) whereas it's the most prevalent in Puerto Rico (62.8%).
 
 ## Results
-**Table of Average Prevalence of Disability by Age**
+### Table of Average Prevalence of Disability by Age
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(data.table)
 dhds_age_comb_dt <- data.table(dhds_age_comb_dt)
@@ -229,8 +229,7 @@ p1 <-ggplot(dt1,
            aes(y=pre_any, fill=age_grp)
            ) + geom_boxplot() +
            facet_wrap(~age_grp,nrow=1) +
-           labs(title="Boxplot Comparing Prevalence of Any Disability by Age", y="Prevalence(%)"
-                ,fill="Age")
+           labs(y="Prevalence(%)",fill="Age")
 box_1 <- ggplotly(p1)
 
 # Histogram of prevalence of any disease 
@@ -275,7 +274,8 @@ dt3 <- dhds_age_comb %>%filter(!(pre_mob%in% NA) & !(pre_cog%in% NA))
 p3<- ggplot(dt3, mapping=aes(x=pre_cog, y=pre_mob, color=age_grp))+
   geom_point()+
   stat_smooth(method=lm) +
-  labs(title="The association between prevalence of cognitive and mobidity disability", x="cognitive disability(%)", y="mobidity disability(%)")
+  scale_colour_discrete("Age")+
+  labs(x="cognitive disability(%)", y="mobidity disability(%)")+
   theme()
 scat_1 <- ggplotly(p3)
 
@@ -321,7 +321,7 @@ map_65 <- plot_geo(dt_65, locationmode = 'USA-states') %>%
                geo=set_map)
 ```
 
-
+### Boxplot Comparing Prevalence of Any Disability by Age
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 ggplotly(p1) 
 ```
@@ -355,8 +355,9 @@ ggplotly(p5)
 ```
 The most prevalent disability across the nation is cognitive disability for the young population (aged 18-44) in all states, and mobidity disability is the most prevalent for older population. 
 
+### Association between prevalence of cognitive and mobidity disability
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
-ggplotly(p3)
+scat_1 
 ```
 A positive association between prevalence of cognitive disability and mobidity disability is observed in all age groups. The slope is the flattest in the young population and it gets sharper in older population. 
 
