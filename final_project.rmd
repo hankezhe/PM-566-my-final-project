@@ -299,6 +299,7 @@ map_65 <- plot_geo(dt_65, locationmode = 'USA-states') %>%
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 ggplotly(p1) 
 ```
+
 - For age of 18-44, the mean (range) of the prevalence of any disability across the nation is 18.7% (12.9-29.3%).
 - For age of 45-65, the mean (range) of the prevalence of any disability across the nation is 28.1% (20.6-53.3%).
 - For age over 65, the mean (range) of the prevalence of any disability across the nation is 40.3% (32.2-62.8%).
