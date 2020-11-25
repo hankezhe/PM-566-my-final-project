@@ -1,5 +1,5 @@
 ---
-title: "PM566 Final Project"
+title: "Explore the Prevalence of US Adult Disability in 2018"
 author: "Hanke Zheng"
 output:
   html_document:
@@ -10,7 +10,9 @@ output:
   pdf_document:
     toc: yes
 ---
-**This is my PM566 Final Project website.**
+**Email address: hankezhe@usc.edu**
+**Written report: **
+
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(data.table)
 library(tidyverse)
@@ -34,26 +36,8 @@ opts_chunk$set(
   out.width = "700px",
   class.source = "code-r")
 ```
-## Introducation: 
-**The objective is to explore (1)the association between disability prevalence and age, and (2)the association between prevalence of different types of disability across the US, especially between cognitive disability and mobidity disability. **
+**This website is to take an overview of the prevalence of disability by region and age among US adults using 2018 data derived from the Disability and Health Data System (DHDS). All datapoints for this analysis are actual states/regions in the US. **
 
-
-### Several specific questions were addressed.
-- Is the prevalence of distributed evenly across states?
-- On average, what is the mean prevalence for each disability in each age group? 
-- Within each age group, which state has the highest/lowest overall prevalence of any disability? How about cognitive disability and mobidity disability? 
-- Within each age group, what type of disability is the most prevalent across all the states, and which one is the leaste prevalent? 
-- Is there an association between age and prevalence of disability? 
-- Is there an association between prevalence of cognitive disability and mobidity disability? 
-
-### Background of the raw dataset
-The data source for this program is the Disability and Health Data System (DHDS) 2018, which is an online dataset providing the prevalence of adult disabilities by region in the US in 2018. Prevalence on six functional disability types, including cognitive (serious difficulty concentrating, remembering or making decisions), hearing (serious difficulty hearing or deaf), mobility (serious difficulty walking or climbing stairs), vision (serious difficulty seeing), self-care (difficulty dressing or bathing) and independent living (difficulty doing errands alone),are reported by age group, race, gender, and veteran status within each state, respectively. 
-
-## Methods:
-### Data Source
-- The data was downloaded from the Center of Disease Control and Prevention(https://data.cdc.gov/).
-- There are 7168 rows and 31 coloumns in the raw dataset; each raw gives a piece of information of each each state. It is not ordered. 
-- The raw dataset is a long dataset, with the prevalence of each type of disbility and the prevalence of any disbility by reponse type (e.g. age, race, gender, veteran status) for each state and Health and 11 Humen Health Service (HHS) regions reported in each row. The prevalence of the 6 disability types doesn't add up equal to the prevalence of any disability, the potential explanation is that a proportion of people might have multiple conditions.
 ```{r, message=FALSE, echo=FALSE, warning=FALSE, results='hide',fig.show='hide'}
 library(data.table)
 ### First download the data and read into data table
@@ -96,13 +80,6 @@ table(dhds_age$dis_type)
 table(dhds_age$state)
 summary(dhds_age$prevalence)
 ```
-
-### Data Preparation
-- R package "data table", "dplyr", and "dplyer" were mainly used to check, and manipulate the data to create a final main dataset for further analysis. 
-- To clean the dataset to answer the research question, I excluded irrelevant rows for which the 'responses' were not age and the values reported from the HHS level. Some variables were renamed for easier reference.
-- For future comparisons between prevalence of different types of disabilities, the dataset was reshaped from long to wide to be a state-level dataset, with the prevalence of different disabilities listed as seperate colounms. 
-- Comparing the prevalence value in each state as a raw, a new categorical variable was created to record the disease type with the greatest prevalence for each state by age. 
-- In the final main dataset for analysis, there are 162 rows/observations (each row gives the statistics of each state or region divided by different age groups) and 13 coloumns/variables of interest. 
 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE, results='hide',fig.show='hide'}
 # Reshape the data from long to wide 
@@ -159,7 +136,7 @@ str(dhds_age_comb)
 head(dhds_age_comb)
 ```
 
-### Exploratory Data Analysis
+
 ```{r, message=FALSE, echo=FALSE, warning=FALSE, results='hide',fig.show='hide'}
 # Check if there's any NA for each prevalence value and do some exploratory statistics 
 summary(dhds_age_comb$pre_any)
@@ -187,11 +164,7 @@ dhds_age_comb_dt[(age_grp=="65+")][order(pre_any)]%>% head(1)
 dhds_age_comb_dt[(age_grp=="65+")][order(pre_any)]%>% tail(1)
 
 ```
-- The number of NAs for those key variables (prevalence) is very small. 
-- The distribution of prevalence of any disease is not normally distributed. With a mean of 30.92%, most data points are concentrated between 15-25% and 40-45%. Except for hearing and mobilidity disabilities, the distribution of all other types of disability is normal. The mean of prevalence of mobility disability is the highest (16.6%) whereas it's the lowest for self-care disability (4.365%).
-- For age 18-44, disability of any disease is the least prevalent in DC (12.9%) whereas it's most prevalent in Puerto Rico(29.3%). For age 45-65, For age 65+,disability of any disease is the least prevalent in Colorado (20.6%) whereas it's the most prevalent in Puerto Rico(53.3%). For 65+, disability of any disease is the least prevalent in Colorado (32.2%) whereas it's the most prevalent in Puerto Rico (62.8%).
 
-## Results
 ### Table of Average Prevalence of Disability by Age
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(data.table)
@@ -239,7 +212,7 @@ p4<-ggplot(dhds_age_comb)+
   labs(title="Distribution of Prevalence of Any Disability", 
        x="Prevalence(%)", y="Count",fill="Age") +
   theme()
-hist_1 <- ggplotly(p4)
+ggplotly(p4)
 
 # Histogram of prevalence of cognitive disease 
 p6<-ggplot(dhds_age_comb)+
@@ -249,7 +222,7 @@ p6<-ggplot(dhds_age_comb)+
        x="Prevalence(%)", y="Count", fill="Age") +
   theme()
 hist_2 <- ggplotly(p6)
-# Histogram of prevalence of mobidity disease 
+# Histogram of prevalence of mobidity disease
 p7<-ggplot(dhds_age_comb)+
   geom_histogram(mapping = aes(x=pre_mob, fill=age_grp))+
   scale_fill_brewer(palette = "Spectral")+
@@ -330,6 +303,20 @@ ggplotly(p1)
 - For age over 65, the mean (range) of the prevalence of any disability across the nation is 40.3% (32.2-62.8%).
 
 ### Distribution of Prevalence of Disability{.tabset}
+*The data could be spread out due to the small sample size.*
+
+- For the prevalence of any disability, it is normally distributed for age 18-44 and age over 65 whereas it's not normally distributed for age of 44-65. 
+- The prevalence of any disability is concentrated on the left for age 18-44, with the most prevalent value being 20.6% (N=10 states).
+- The prevalence of any disability is concentrated in the middle for age 45-64, with the most prevalent value being 39.6% (N=10 states).
+- The prevalence of any disability is concentrated on the right for age over 65, with the most prevalent value being 43% (N=10 states).
+- For age 18-44, the prevalence of cognitive disability is all under 10%, most states/regions are under 5% (N=25).
+- For age 45-64,the most prevalent value being around 12.5% and around 16% (N=9 states/regions for each).
+- Fpr age > 65, the prevalence of cognitive disability is concentrated between 22% to 28%, with the most prevalent value being around 27% (N=9 states/resgions).
+- The distribution of prevalence of mobidity disability is more concentrated in comparative to that of cognitive disability. 
+- For age 18-44, the prevalence of cognitive disability is all under 10%, most states/regions are under 5% (N=25).
+- For age 45-64,the most prevalent value being around 12.5% and around 16% (N=9 states/regions for each).
+- The prevalence of cognitive disability is concentrated between 22% to 28%, with the most prevalent value being around 27% (N=9 states/resgions).
+
 #### Any Disability
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 ggplotly(p4)
@@ -344,24 +331,27 @@ ggplotly(p6)
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 ggplotly(p7)
 ```
-**Will elaborate more here for the narrative**
-- For the prevalence of any disability, it is normally distributed for age 18-44 and age over 65 whereas it's not normally distributed for age of 44-65. 
-- The prevalence of any disability is concentrated on the left for age 18-44, with the most prevalent value being 20.6% (N=10 states).
-- The prevalence of any disability is concentrated in the middle for age 45-64, with the most prevalent value being 39.6% (N=10 states).
-- The prevalence of any disability is concentrated on the right for age over 65, with the most prevalent value being 43% (N=10 states).
 
+### What is the most prevalent disability across the nation? 
+The most prevalent disability across the nation is cognitive disability for the young population (aged 18-44) in all states, and mobidity disability is the most prevalent for older population. 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 ggplotly(p5) 
 ```
-The most prevalent disability across the nation is cognitive disability for the young population (aged 18-44) in all states, and mobidity disability is the most prevalent for older population. 
+
 
 ### Association between prevalence of cognitive and mobidity disability
+A positive association between prevalence of cognitive disability and mobidity disability is observed in all age groups. The slope is the flattest in the young population and it gets sharper in older population. 
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 scat_1 
 ```
-A positive association between prevalence of cognitive disability and mobidity disability is observed in all age groups. The slope is the flattest in the young population and it gets sharper in older population. 
 
 ### Distribution of Disability by State {.tabset}
+- Based on the calculated average prevalence by age, there is an increasing trend by age seen in the prevalence of any disability: 18.86% for 18-44, 29.77% for 45-64, and 44.13% for 65+. Similar increasing trends are observed in hearing disability, mobility disability, vision disability and independence disability. An obvious positive association between age and prevalence of any disability was osberved from the boxplots. 
+
+- As shown from the barchart, the prevalence of cognitive disability is the greatest for age of 18-44 in all states in 2018. Mobidity disability is the most prevalent for age 45-64 in all states, and it's also the most prevalent for age 65+ in most states (the prevalence of hearing disability is the greatest in several states).
+
+- As shown from the scatterplots, there is a positive association between prevalence of cognitive disability and mobidity disability, meaning that if the prelence of cognitive disability is high in one state the prevalence of mobidity disability is also likely to be high.The slopes for age 45-64 and 65+ are close whereas the curve is relatively flat for age of 18-44. 
+
 #### For age of 18-44
 ```{r, message=FALSE, echo=FALSE, warning=FALSE}
 map_18
@@ -378,16 +368,5 @@ map_45
 map_65
 ```
 
-- Based on the calculated average prevalence by age, there is an increasing trend by age seen in the prevalence of any disability: 18.86% for 18-44, 29.77% for 45-64, and 44.13% for 65+. Similar increasing trends are observed in hearing disability, mobility disability, vision disability and independence disability. An obvious positive association between age and prevalence of any disability was osberved from the boxplots. 
-
-- As shown from the barchart, the prevalence of cognitive disability is the greatest for age of 18-44 in all states in 2018. Mobidity disability is the most prevalent for age 45-64 in all states, and it's also the most prevalent for age 65+ in most states (the prevalence of hearing disability is the greatest in several states).
-
-- As shown from the scatterplots, there is a positive association between prevalence of cognitive disability and mobidity disability, meaning that if the prelence of cognitive disability is high in one state the prevalence of mobidity disability is also likely to be high.The slopes for age 45-64 and 65+ are close whereas the curve is relatively flat for age of 18-44. 
-
-## Conclusion:
-- Puerto Rico is the region with the highest prevalence of any disability in all ages in 2018.
-- Across all states, cognitive disability and mobidity disability are the two that are most prevalent in comparative to other types of disability, with cognitive disability more prevalent among the young (<65) and mobidity disability being more common in older population(65+). 
-- Overall, the prevalences of any disability, hearing disability, mobility disability, vision disability and independence disability are positively associated with aging. People are more likely to be in a stage with these types of disability as they age. 
-- There is a positive association between prevalence of cognitive disability and mobidity disability, but mroe information is needed to ascertain this relationship. 
 
 
