@@ -11,7 +11,8 @@ output:
     toc: yes
 ---
 **Email address: hankezhe@usc.edu**
-**Written report: **
+
+**Written report: https://github.com/hankezhe/PM-566-my-final-project/blob/main/written%20report.pdf **
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(data.table)
